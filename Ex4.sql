@@ -2,9 +2,8 @@
 SELECT * FROM student AS s LEFT JOIN takes as t ON s.ID = t.ID;
 
 
+
 /*Exercício 2*/
-
-
 SELECT s.ID, s.name, COUNT(t.course_id) as quantidade_cursos
 FROM student as s
 LEFT JOIN takes AS t ON s.ID = t.ID
@@ -14,8 +13,8 @@ GROUP BY s.ID, s.name
 ORDER BY quantidade_cursos DESC;
 
 
-/*Exercício 3 */
 
+/*Exercício 3 */
 CREATE VIEW civil_eng_students AS 
 SELECT s.ID, s.name, COUNT(t.course_id) as quantidade_cursos
 FROM student as s
