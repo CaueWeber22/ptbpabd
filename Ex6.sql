@@ -4,7 +4,7 @@ CREATE TABLE pessoa (
     id INT PRIMARY KEY,
     nome VARCHAR(50),
     sobrenome VARCHAR(50),
-    idade INT CHECK (idade >= 0)
+    idade INT CHECK (idade > 0)
 );
 
 -- Questão 2
