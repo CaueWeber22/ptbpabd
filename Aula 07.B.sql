@@ -2,6 +2,7 @@
 CREATE PROCEDURE dbo.salaryHistogram
     @numIntervalos INT
 AS
+    
 BEGIN
     SET NOCOUNT ON;
 
@@ -27,22 +28,18 @@ BEGIN
         DECLARE @high FLOAT = @low + @intervalSize;
 
         INSERT INTO #Histogram (valorMinimo, valorMaximo, total)
-        SELECT 
-            @low,
-            @high,
+        SELECT @low, @high,
             COUNT(*) 
         FROM instructor
         WHERE salary >= @low AND salary < @high;
-
         SET @i = @i + 1;
     END
 
     UPDATE #Histogram
-    SET valorMaximo = @maxSalary
-    WHERE valorMaximo = (SELECT MAX(valorMaximo) FROM #Histogram);
+        SET valorMaximo = @maxSalary
+        WHERE valorMaximo = (SELECT MAX(valorMaximo) FROM #Histogram);
 
-    SELECT * FROM #Histogram;
-
+        SELECT * FROM #Histogram;
 END;
 
 EXEC dbo.salaryHistogram 5;
