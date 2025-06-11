@@ -1,0 +1,45 @@
+- show dbs - lista todas instâncias do MongoDB conectadas;
+
+- use ifsp -  seleciona o banco de dados chamado ifsp. Se ele não existir, o MongoDB o cria automaticamente quando você inserir dados nele;
+- db - atalho para o banco em que está trabalhando;
+
+- var pessoa = {"nome" : "João", "idade": 25} - cria uma variável JavaScript;
+
+- db.pessoas.insertOne(pessoa) - insere a variável como um documento na collection;
+
+- show collections - verifica se a collection foi criada;
+
+- db.pessoas.find() - retorna os documentos da collection;
+
+- db.pessoas.findOne() - retorna o primeiro documento da collection;
+
+- db.pessoas.find(criterio_de_busca) - busca um documento baseado em um critério;
+
+- db.pessoas.countDocuments() - conta quanto documentos existem na collection;
+
+- db.pessoas.find({
+  "$or": [
+    { "nome": "João" },
+    { "idade": 34 }
+  ]
+})   - retorna documentos que atendam a pelo menos um dos critérios passados (query selector);
+
+- db.pessoas.remove({ "nome": "João" }) - remove documentos que atendem ao critério informado;
+
+- db.contatos.update(
+  { "nome": "João" },         // Filtro
+  { $set: { "idade": 51 } }       // Atualização
+) - atualiza os dados de um documento;
+
+- db.contatos.update(
+  { "nome": "Maria" },      
+  { $set: { "idade": "21" } }, 
+  { upsert: true }                       
+) - a opção upsert faz com que o documento seja criado caso não exista;
+
+
+- Inserindo documentos dentro de documentos(embedded documentos)
+var pessoaUm = db.pessoas.findOne({ "nome": "João" }) - Buscar a pessoa principal
+var pessoaDois = db.pessoas.findOne({ "nome": "Mario" }) - Buscar a pessoa secundária
+pessoaUm.pessoaDois = emergencia - Atribuir o contato de emergência como subdocumento
+db.contatos.update({ "_id": pessoa._id }, pessoaUm) - Atualizar o documento no banco
