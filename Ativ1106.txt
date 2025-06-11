@@ -31,7 +31,7 @@
   { $set: { "idade": 51 } }       // Atualização
 ) - atualiza os dados de um documento;
 
-- db.contatos.update(
+- db.pessoas.update(
   { "nome": "Maria" },      
   { $set: { "idade": "21" } }, 
   { upsert: true }                       
@@ -42,4 +42,4 @@
 var pessoaUm = db.pessoas.findOne({ "nome": "João" }) - Buscar a pessoa principal
 var pessoaDois = db.pessoas.findOne({ "nome": "Mario" }) - Buscar a pessoa secundária
 pessoaUm.pessoaDois = emergencia - Atribuir o contato de emergência como subdocumento
-db.contatos.update({ "_id": pessoa._id }, pessoaUm) - Atualizar o documento no banco
+db.pessoas.update({ "_id": pessoa._id }, pessoaUm) - Atualizar o documento no banco
